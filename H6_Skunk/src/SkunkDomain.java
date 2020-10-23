@@ -66,7 +66,7 @@ public class SkunkDomain
 					ui.println("Two Skunks! You lose the turn, zeroing out both turn and game scores and paying 4 chips to the kitty");
 					
 					// Move adjust kitty and change player chips in to method
-					adjustKittyAndPlayerChips(4, true, true, wantsToRoll);
+					wantsToRoll = adjustKittyAndPlayerChips(4, true, true);
 					
 					break;
 				}
@@ -76,7 +76,7 @@ public class SkunkDomain
 							"Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
 					
 					// Move adjust kitty and change player chips in to method
-					adjustKittyAndPlayerChips(2, true, false, wantsToRoll);
+					wantsToRoll = adjustKittyAndPlayerChips(2, true, false);
 					
 					break;
 				}
@@ -85,7 +85,7 @@ public class SkunkDomain
 					ui.println("One Skunk! You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
 					
 					// Move adjust kitty and change player chips in to method
-					adjustKittyAndPlayerChips(1, true, false, wantsToRoll);
+					wantsToRoll = adjustKittyAndPlayerChips(1, true, false);
 					
 					break;
 
@@ -151,7 +151,7 @@ public class SkunkDomain
 					ui.println("Two Skunks! You lose the turn, zeroing out both turn and game scores and paying 4 chips to the kitty");
 					
 					// Move adjust kitty and change player chips in to method
-					adjustKittyAndPlayerChips(4, true, true, wantsToRoll);
+					wantsToRoll = adjustKittyAndPlayerChips(4, true, true);
 					
 					break;
 				}
@@ -161,16 +161,16 @@ public class SkunkDomain
 							"Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
 					
 					// Move adjust kitty and change player chips in to method
-					adjustKittyAndPlayerChips(2, true, false, wantsToRoll);
-					
+					wantsToRoll = adjustKittyAndPlayerChips(2, true, false);
+										
 				}
 				else if (skunkDice.getDie1().getLastRoll() == 1 || skunkDice.getDie2().getLastRoll() == 1)
 				{
 					ui.println("One Skunk!  You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
 					
 					// Move adjust kitty and change player chips in to method
-					adjustKittyAndPlayerChips(1, true, false, wantsToRoll);
-					
+					wantsToRoll = adjustKittyAndPlayerChips(1, true, false);
+										
 				}
 				else
 				{
@@ -237,7 +237,7 @@ public class SkunkDomain
 
 	
 	// Move adjust kitty and change player chips into method
-	private void adjustKittyAndPlayerChips(int k, boolean resetTurnScore, boolean resetGameScore, boolean wantsToRoll) {
+	private boolean adjustKittyAndPlayerChips(int k, boolean resetTurnScore, boolean resetGameScore) {
 		kitty += k;
 		activePlayer.setNumberChips(activePlayer.getNumberChips() - k);
 		if(resetTurnScore) {
@@ -246,8 +246,7 @@ public class SkunkDomain
 		if(resetGameScore) {
 		activePlayer.setGameScore(0);
 		}
-		wantsToRoll = false;
-		return;
+		return false;
 	}
 
 }
