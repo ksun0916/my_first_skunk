@@ -3,6 +3,10 @@ import edu.princeton.cs.introcs.*;
 
 public class SkunkDomain
 {
+	private static final int PENALTY_FOR_ONE_SKUNK = 1;
+	private static final int PENALTY_FOR_SKUNK_DEUCE = 2;
+	private static final int PENALTY_FOR_TWO_SKUNK = 4;
+	private static final int ZERO_SCORE = 0;
 	private static final int DICE_FOR_SKUNK_DEUCE = 3;
 	private static final int DICE_FOR_TWO_SKUNK = 2;
 	private static final int DIE_FOR_ONE_SKUNK = 1;
@@ -55,22 +59,25 @@ public class SkunkDomain
 		while (gameNotOver)
 		{
 			ui.println("Next player is " + playerNames[activePlayerIndex] + ".");
-			activePlayer.setTurnScore(0);
+			// Extract constant for ZERO_SCORE = 0
+			activePlayer.setTurnScore(ZERO_SCORE);
 			
 			String wantsToRollStr = ui.promptReadAndReturn("Roll? y or n");
 			boolean wantsToRoll = 'y' == wantsToRollStr.toLowerCase().charAt(0);
 			
 			while (wantsToRoll)
 			{
-				activePlayer.setRollScore(0);
+				// Extract constant for ZERO_SCORE = 0
+				activePlayer.setRollScore(ZERO_SCORE);
 				skunkDice.roll();
 				// Extract constant for DICE_FOR_TWO_SKUNK = 2
 				if (skunkDice.getLastRoll() == DICE_FOR_TWO_SKUNK)
 				{
 					ui.println("Two Skunks! You lose the turn, zeroing out both turn and game scores and paying 4 chips to the kitty");
 					
+					// Extract constant for PENALTY_FOR_TWO_SKUNK = 4
 					// Move adjust kitty and change player chips in to method
-					wantsToRoll = adjustKittyAndPlayerChips(4, true, true);
+					wantsToRoll = adjustKittyAndPlayerChips(PENALTY_FOR_TWO_SKUNK, true, true);
 					
 					break;
 				}
@@ -80,8 +87,9 @@ public class SkunkDomain
 					ui.println(
 							"Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
 					
+					// Extract constant for PENALTY_FOR_SKUNK_DEUCE = 2
 					// Move adjust kitty and change player chips in to method
-					wantsToRoll = adjustKittyAndPlayerChips(2, true, false);
+					wantsToRoll = adjustKittyAndPlayerChips(PENALTY_FOR_SKUNK_DEUCE, true, false);
 					
 					break;
 				}
@@ -90,8 +98,9 @@ public class SkunkDomain
 				{
 					ui.println("One Skunk! You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
 					
+					// Extract constant for PENALTY_FOR_ONE_SKUNK = 1
 					// Move adjust kitty and change player chips in to method
-					wantsToRoll = adjustKittyAndPlayerChips(1, true, false);
+					wantsToRoll = adjustKittyAndPlayerChips(PENALTY_FOR_ONE_SKUNK, true, false);
 					
 					break;
 
@@ -142,7 +151,8 @@ public class SkunkDomain
 		for (int i = activePlayerIndex, count = 0; count < numberOfPlayers-1; i = (i++) % numberOfPlayers, count++)
 		{
 			ui.println("Last turn for player " + playerNames[activePlayerIndex] + "...");
-			activePlayer.setTurnScore(0);
+			// Extract constant for ZERO_SCORE = 0
+			activePlayer.setTurnScore(ZERO_SCORE);
 
 			String wantsToRollStr = ui.promptReadAndReturn("Roll? y or n");
 			boolean wantsToRoll = 'y' == wantsToRollStr.toLowerCase().charAt(0);
@@ -157,8 +167,9 @@ public class SkunkDomain
 				{
 					ui.println("Two Skunks! You lose the turn, zeroing out both turn and game scores and paying 4 chips to the kitty");
 					
+					// Extract constant for PENALTY_FOR_TWO_SKUNK = 4
 					// Move adjust kitty and change player chips in to method
-					wantsToRoll = adjustKittyAndPlayerChips(4, true, true);
+					wantsToRoll = adjustKittyAndPlayerChips(PENALTY_FOR_TWO_SKUNK, true, true);
 					
 					break;
 				}
@@ -168,8 +179,9 @@ public class SkunkDomain
 					ui.println(
 							"Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
 					
+					// Extract constant for PENALTY_FOR_SKUNK_DEUCE = 2
 					// Move adjust kitty and change player chips in to method
-					wantsToRoll = adjustKittyAndPlayerChips(2, true, false);
+					wantsToRoll = adjustKittyAndPlayerChips(PENALTY_FOR_SKUNK_DEUCE, true, false);
 										
 				}
 				// Extract constant for DIE_FOR_ONE_SKUNK = 1
@@ -177,8 +189,9 @@ public class SkunkDomain
 				{
 					ui.println("One Skunk!  You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
 					
+					// Extract constant for PENALTY_FOR_ONE_SKUNK = 1
 					// Move adjust kitty and change player chips in to method
-					wantsToRoll = adjustKittyAndPlayerChips(1, true, false);
+					wantsToRoll = adjustKittyAndPlayerChips(PENALTY_FOR_ONE_SKUNK, true, false);
 										
 				}
 				else
@@ -250,10 +263,12 @@ public class SkunkDomain
 		kitty += k;
 		activePlayer.setNumberChips(activePlayer.getNumberChips() - k);
 		if(resetTurnScore) {
-			activePlayer.setTurnScore(0);
+			// Extract constant for ZERO_SCORE = 0
+			activePlayer.setTurnScore(ZERO_SCORE);
 		}
 		if(resetGameScore) {
-		activePlayer.setGameScore(0);
+			// Extract constant for ZERO_SCORE = 0
+			activePlayer.setGameScore(ZERO_SCORE);
 		}
 		return false;
 	}
