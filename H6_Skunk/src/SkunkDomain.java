@@ -126,17 +126,9 @@ public class SkunkDomain
 			if (activePlayer.getGameScore() >= 100)
 				gameNotOver = false;
 
-			ui.println("Scoreboard: ");
-			ui.println("Kitty has " + kitty + " chips.");
-			ui.println("Player name -- Turn score -- Game score -- Total chips");
-			ui.println("-----------------------");
-
-			for (int i = 0; i < numberOfPlayers; i++)
-			{
-				ui.println(playerNames[i] + " -- " + players.get(i).getTurnScore() + " -- " + players.get(i).getGameScore()
-						+ " -- " + players.get(i).getNumberChips());
-			}
-			ui.println("-----------------------");
+			
+			// Extract method print score board
+			printScoreBoard();
 
 			ui.println("Turn passes to right...");
 
@@ -200,17 +192,10 @@ public class SkunkDomain
 					ui.println("Roll of " + skunkDice.toString() + ", giving new turn score of "
 							+ activePlayer.getTurnScore());
 
-					ui.println("Scoreboard: ");
-					ui.println("Kitty has " + kitty);
-					ui.println("Player name -- Turn score -- Game score -- Total chips");
-					ui.println("-----------------------");
-
-					for (int pNumber = 0; pNumber < numberOfPlayers; pNumber++)
-					{
-						ui.println(playerNames[pNumber] + " -- " + players.get(pNumber).turnScore + " -- "
-								+ players.get(pNumber).getGameScore() + " -- " + players.get(pNumber).getNumberChips());
-					}
-					ui.println("-----------------------");
+					ui.println("");
+					
+					// Extract method print score board
+					printScoreBoard();
 
 					// Extract method to check whether player want to roll
 					wantsToRoll = whetherPlayerWantToRoll();
@@ -243,18 +228,26 @@ public class SkunkDomain
 		players.get(winner).setNumberChips(players.get(winner).getNumberChips() + kitty);
 		ui.println("Game winner earns " + kitty + " chips , finishing with " + players.get(winner).getNumberChips());
 
-		ui.println("\nFinal scoreboard for this game:");
-		ui.println("Player name -- Game score -- Total chips");
+		// Extract method print score board
+		ui.println("");
+		ui.print("Final ");
+		printScoreBoard();
+		
+		return true;
+	}
+
+	private void printScoreBoard() {
+		ui.println("Scoreboard: ");
+		ui.println("Kitty has " + kitty + " chips.");
+		ui.println("Player name -- Turn score -- Game score -- Total chips");
 		ui.println("-----------------------");
 
 		for (int pNumber = 0; pNumber < numberOfPlayers; pNumber++)
 		{
-			ui.println(playerNames[pNumber] + " -- " + players.get(pNumber).getGameScore() + " -- "
-					+ players.get(pNumber).getNumberChips());
+			ui.println(playerNames[pNumber] + " -- " + players.get(pNumber).getTurnScore() + " -- "
+					+ players.get(pNumber).getGameScore() + " -- " + players.get(pNumber).getNumberChips());
 		}
-
 		ui.println("-----------------------");
-		return true;
 	}
 
 	// Extract method to check whether player want to roll
