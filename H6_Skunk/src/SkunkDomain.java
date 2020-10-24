@@ -62,8 +62,8 @@ public class SkunkDomain
 			// Extract constant for ZERO_SCORE = 0
 			activePlayer.setTurnScore(ZERO_SCORE);
 			
-			String wantsToRollStr = ui.promptReadAndReturn("Roll? y or n");
-			boolean wantsToRoll = 'y' == wantsToRollStr.toLowerCase().charAt(0);
+			// Extract method to check whether player want to roll
+			boolean wantsToRoll = whetherPlayerWantToRoll();
 			
 			while (wantsToRoll)
 			{
@@ -111,8 +111,8 @@ public class SkunkDomain
 				ui.println(
 						"Roll of " + skunkDice.toString() + ", gives new turn score of " + activePlayer.getTurnScore());
 
-				wantsToRollStr = ui.promptReadAndReturn("Roll again? y or n");
-				wantsToRoll = 'y' == wantsToRollStr.toLowerCase().charAt(0);
+				// Extract method to check whether player want to roll
+				wantsToRoll = whetherPlayerWantToRoll();				
 
 			}
 
@@ -154,8 +154,8 @@ public class SkunkDomain
 			// Extract constant for ZERO_SCORE = 0
 			activePlayer.setTurnScore(ZERO_SCORE);
 
-			String wantsToRollStr = ui.promptReadAndReturn("Roll? y or n");
-			boolean wantsToRoll = 'y' == wantsToRollStr.toLowerCase().charAt(0);
+			// Extract method to check whether player want to roll
+			boolean wantsToRoll = whetherPlayerWantToRoll();
 
 			while (wantsToRoll)
 			{
@@ -212,8 +212,8 @@ public class SkunkDomain
 					}
 					ui.println("-----------------------");
 
-					wantsToRollStr = ui.promptReadAndReturn("Roll again? y or n");
-					wantsToRoll = 'y' == wantsToRollStr.toLowerCase().charAt(0);
+					// Extract method to check whether player want to roll
+					wantsToRoll = whetherPlayerWantToRoll();
 				}
 
 			}
@@ -255,6 +255,12 @@ public class SkunkDomain
 
 		ui.println("-----------------------");
 		return true;
+	}
+
+	// Extract method to check whether player want to roll
+	private boolean whetherPlayerWantToRoll() {
+		String wantsToRollStr = ui.promptReadAndReturn("Do you want to roll? y or n");
+		return 'y' == wantsToRollStr.toLowerCase().charAt(0);
 	}
 
 	
