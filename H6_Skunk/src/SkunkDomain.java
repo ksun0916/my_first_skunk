@@ -3,6 +3,9 @@ import edu.princeton.cs.introcs.*;
 
 public class SkunkDomain
 {
+	private static final int DICE_FOR_SKUNK_DEUCE = 3;
+	private static final int DICE_FOR_TWO_SKUNK = 2;
+	private static final int DIE_FOR_ONE_SKUNK = 1;
 	public SkunkUI skunkUI;
 	public UI ui;
 	public int numberOfPlayers;
@@ -61,7 +64,8 @@ public class SkunkDomain
 			{
 				activePlayer.setRollScore(0);
 				skunkDice.roll();
-				if (skunkDice.getLastRoll() == 2)
+				// Extract constant for DICE_FOR_TWO_SKUNK = 2
+				if (skunkDice.getLastRoll() == DICE_FOR_TWO_SKUNK)
 				{
 					ui.println("Two Skunks! You lose the turn, zeroing out both turn and game scores and paying 4 chips to the kitty");
 					
@@ -70,7 +74,8 @@ public class SkunkDomain
 					
 					break;
 				}
-				else if (skunkDice.getLastRoll() == 3)
+				// Extract constant for DICE_FOR_SKUNK_DEUCE = 3
+				else if (skunkDice.getLastRoll() == DICE_FOR_SKUNK_DEUCE)
 				{
 					ui.println(
 							"Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
@@ -80,7 +85,8 @@ public class SkunkDomain
 					
 					break;
 				}
-				else if (skunkDice.getDie1().getLastRoll() == 1 || skunkDice.getDie2().getLastRoll() == 1)
+				// Extract constant for DIE_FOR_ONE_SKUNK = 1
+				else if (skunkDice.getDie1().getLastRoll() == DIE_FOR_ONE_SKUNK || skunkDice.getDie2().getLastRoll() == DIE_FOR_ONE_SKUNK)
 				{
 					ui.println("One Skunk! You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
 					
@@ -146,7 +152,8 @@ public class SkunkDomain
 				skunkDice.roll();
 				ui.println("Roll is " + skunkDice.toString() + "\n");
 
-				if (skunkDice.getLastRoll() == 2)
+				// Extract constant for DICE_FOR_TWO_SKUNK = 2
+				if (skunkDice.getLastRoll() == DICE_FOR_TWO_SKUNK)
 				{
 					ui.println("Two Skunks! You lose the turn, zeroing out both turn and game scores and paying 4 chips to the kitty");
 					
@@ -155,7 +162,8 @@ public class SkunkDomain
 					
 					break;
 				}
-				else if (skunkDice.getLastRoll() == 3)
+				// Extract constant for DICE_FOR_SKUNK_DEUCE = 3
+				else if (skunkDice.getLastRoll() == DICE_FOR_SKUNK_DEUCE)
 				{
 					ui.println(
 							"Skunks and Deuce! You lose the turn, zeroing out the turn score and paying 2 chips to the kitty");
@@ -164,7 +172,8 @@ public class SkunkDomain
 					wantsToRoll = adjustKittyAndPlayerChips(2, true, false);
 										
 				}
-				else if (skunkDice.getDie1().getLastRoll() == 1 || skunkDice.getDie2().getLastRoll() == 1)
+				// Extract constant for DIE_FOR_ONE_SKUNK = 1
+				else if (skunkDice.getDie1().getLastRoll() == DIE_FOR_ONE_SKUNK || skunkDice.getDie2().getLastRoll() == DIE_FOR_ONE_SKUNK)
 				{
 					ui.println("One Skunk!  You lose the turn, zeroing out the turn score and paying 1 chip to the kitty");
 					
